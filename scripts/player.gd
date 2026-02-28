@@ -7,6 +7,7 @@ signal mine_requested(world_position: Vector2)
 @export var mine_reach: float = 28.0
 
 var facing: int = 1
+@onready var character_visual: Node2D = $CharacterVisual
 
 func _ready() -> void:
 	add_to_group("player")
@@ -19,6 +20,7 @@ func _physics_process(delta: float) -> void:
 	var move_input: float = Input.get_axis("ui_left", "ui_right")
 	if move_input != 0.0:
 		facing = 1 if move_input > 0.0 else -1
+		character_visual.scale.x = facing
 
 	velocity.x = move_input * speed
 

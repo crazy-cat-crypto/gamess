@@ -11,9 +11,37 @@ script = ExtResource("1_bxio5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2p0vr")
 
-[node name="Body" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-6, -10, 6, -10, 6, 10, -6, 10)
-color = Color(0.88, 0.91, 0.97, 1)
+[node name="CharacterVisual" type="Node2D" parent="."]
+
+[node name="Torso" type="Polygon2D" parent="CharacterVisual"]
+polygon = PackedVector2Array(-5, -3, 5, -3, 5, 9, -5, 9)
+color = Color(0.27, 0.55, 0.9, 1)
+
+[node name="Head" type="Polygon2D" parent="CharacterVisual"]
+polygon = PackedVector2Array(-4, -10, 4, -10, 4, -3, -4, -3)
+color = Color(0.98, 0.82, 0.65, 1)
+
+[node name="Helmet" type="Polygon2D" parent="CharacterVisual"]
+polygon = PackedVector2Array(-5, -12, 5, -12, 5, -9, -5, -9)
+color = Color(0.95, 0.83, 0.22, 1)
+
+[node name="LegLeft" type="Polygon2D" parent="CharacterVisual"]
+polygon = PackedVector2Array(-5, 9, -1, 9, -1, 13, -5, 13)
+color = Color(0.18, 0.23, 0.39, 1)
+
+[node name="LegRight" type="Polygon2D" parent="CharacterVisual"]
+polygon = PackedVector2Array(1, 9, 5, 9, 5, 13, 1, 13)
+color = Color(0.18, 0.23, 0.39, 1)
+
+[node name="PickaxeHandle" type="Line2D" parent="CharacterVisual"]
+points = PackedVector2Array(4, 1, 11, -7)
+default_color = Color(0.51, 0.33, 0.18, 1)
+width = 2.0
+
+[node name="PickaxeHead" type="Line2D" parent="CharacterVisual"]
+points = PackedVector2Array(8, -8, 14, -11, 11, -4)
+default_color = Color(0.82, 0.84, 0.9, 1)
+width = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -50)

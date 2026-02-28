@@ -6,9 +6,6 @@ const WORLD_HEIGHT: int = 60
 const SURFACE_ROW: int = 10
 
 const TARGET_SHARDS: int = 10
-const MAX_OXYGEN: float = 100.0
-const OXYGEN_DRAIN_PER_SEC: float = 10.0
-const OXYGEN_REFILL_PER_SEC: float = 30.0
 
 const BLOCK_DIRT: int = 0
 const BLOCK_STONE: int = 1
@@ -16,7 +13,6 @@ const BLOCK_BEDROCK: int = 2
 
 @onready var world: Node2D = $World
 @onready var player: CharacterBody2D = $Player
-@onready var oxygen_bar: ProgressBar = $HUD/OxygenBar
 @onready var shard_label: Label = $HUD/ShardLabel
 @onready var status_label: Label = $HUD/StatusLabel
 
@@ -24,7 +20,6 @@ var block_scene: PackedScene = preload("res://scenes/block.tscn")
 var shard_scene: PackedScene = preload("res://scenes/shard.tscn")
 
 var blocks: Dictionary = {}
-var oxygen: float = MAX_OXYGEN
 var collected_shards: int = 0
 var game_over: bool = false
 
@@ -37,21 +32,13 @@ func _ready() -> void:
 	player.mine_requested.connect(_on_mine_requested)
 	_update_hud("Mine with left click. Collect 10 shards and return to surface.")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if game_over:
 		if Input.is_key_pressed(KEY_R):
 			get_tree().reload_current_scene()
 		return
 
 	var underground: bool = player.global_position.y > float(SURFACE_ROW * TILE_SIZE)
-	if underground:
-		oxygen = maxf(0.0, oxygen - OXYGEN_DRAIN_PER_SEC * delta)
-	else:
-		oxygen = minf(MAX_OXYGEN, oxygen + OXYGEN_REFILL_PER_SEC * delta)
-
-	if oxygen <= 0.0:
-		_end_game(false, "Out of oxygen! Press R to restart.")
-		return
 
 	if collected_shards >= TARGET_SHARDS and not underground:
 		_end_game(true, "You escaped with all shards! Press R to play again.")
@@ -171,10 +158,8 @@ func _end_game(won: bool, message: String) -> void:
 		status_label.text = "LOSE: " + message
 
 func _update_hud(message: String = "") -> void:
-	oxygen_bar.max_value = MAX_OXYGEN
-	oxygen_bar.value = oxygen
 	shard_label.text = "Shards: %d/%d" % [collected_shards, TARGET_SHARDS]
 	if message != "":
 		status_label.text = message
 	elif not game_over:
-		status_label.text = "Surface refills oxygen. Press R to restart."
+		status_label.text = "Collect all shards, then return to surface. Press R to restart."

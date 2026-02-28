@@ -12,23 +12,16 @@ script = ExtResource("1_ka5u7")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="OxygenBar" type="ProgressBar" parent="HUD"]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 360.0
-offset_bottom = 44.0
-show_percentage = false
-
 [node name="ShardLabel" type="Label" parent="HUD"]
 offset_left = 20.0
-offset_top = 52.0
+offset_top = 20.0
 offset_right = 280.0
-offset_bottom = 80.0
+offset_bottom = 48.0
 text = "Shards: 0/10"
 
 [node name="StatusLabel" type="Label" parent="HUD"]
 offset_left = 20.0
-offset_top = 84.0
+offset_top = 52.0
 offset_right = 900.0
-offset_bottom = 116.0
+offset_bottom = 84.0
 text = "Mine with left click."

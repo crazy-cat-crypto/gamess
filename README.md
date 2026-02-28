@@ -5,11 +5,9 @@ A very small 2D mining prototype for the theme **UNDER THE SURFACE**.
 ## What is included
 
 - Side-view 2D underground world (block grid).
-- Move + jump player controller.
+- Simple miner character (visual) with move + jump controller.
 - Mine nearby blocks with left click.
-- Oxygen drains underground and refills at the surface.
 - Collect 10 shards underground, then return to surface to win.
-- Lose if oxygen reaches 0.
 
 ## Open and run
 
